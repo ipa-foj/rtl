@@ -32,10 +32,10 @@ public:
 protected:
     virtual void Initialize(const Data& data, int N)
     {
-        RANSAC::Initialize(data, N);
+		Initialize(data, N);
         dataError2 = new double[N];
         assert(dataError2 != NULL);
-        double sigma = paramThreshold / paramSigmaScale;
+		double sigma = this->paramThreshold / paramSigmaScale;
         dataSigma2 = sigma * sigma;
     }
 
@@ -45,7 +45,7 @@ protected:
         double minError = HUGE_VAL, maxError = -HUGE_VAL;
         for (int i = 0; i < N; i++)
         {
-            double error = toolEstimator->ComputeError(model, data[i]);
+			double error = this->toolEstimator->ComputeError(model, data[i]);
             if (error < minError) minError = error;
             if (error > maxError) maxError = error;
             dataError2[i] = error * error;
@@ -86,7 +86,7 @@ protected:
             delete [] dataError2;
             dataError2 = NULL;
         }
-        RANSAC::Terminate(bestModel, data, N);
+		Terminate(bestModel, data, N);
     }
 
     int paramIterationEM;

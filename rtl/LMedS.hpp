@@ -18,7 +18,7 @@ protected:
     {
         std::vector<double> errors(N);
         for (int i = 0; i < N; i++)
-            errors[i] = fabs(toolEstimator->ComputeError(model, data[i]));
+			errors[i] = fabs(this->toolEstimator->ComputeError(model, data[i]));
         std::nth_element(errors.begin(), errors.begin() + N / 2, errors.end());
         return errors[N / 2];
     }
